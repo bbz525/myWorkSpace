@@ -1,22 +1,31 @@
 package com.jt;
 
-import com.jt.pro.common.SexEnum;
-import com.jt.pro.dao.BlogDao;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
-import java.io.IOException;
+import javax.sql.DataSource;
+import javax.xml.soap.Name;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  * Hello world!
  *
  */
+@Component
 public class App 
 {
-    SexEnum sex = SexEnum.FEMALE;
+    @Autowired
+    @Qualifier(value = "devDatasource")
+    DataSource dataSource;
     public static void main(String[] args) {
-
+        Connection conn=null;
+        try {
+            conn=new App().dataSource.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println(conn);
     }
 }
