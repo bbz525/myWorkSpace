@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jt.pro.dao.EmployeeTaskDao">
+    <resultMap id="EmployeeTaskMapper" type="employeeTask">
+        <id column="id" property="id"/>
+        <result column="emp_id" property="empId"/>
+        <result column="task_name" property="taskName"/>
+        <result property="note" column="note"/>
+        <association property="task" column="task_id" select="com.jt.pro.dao.TaskDao.findTask"/>
+    </resultMap>
+    <select id="findEmployeeTaskByEmpId" resultMap="EmployeeTaskMapper">
+        select
+        <include refid="columns"/>
+        from
+        t_employee_task
+        where
+        emp_id = #{empId}
+    </select>
+    <sql id="columns">
+        id,emp_id,task_name,task_id,note
+    </sql>
+</mapper>

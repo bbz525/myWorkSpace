@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!--配置properties文件-->
+    <properties resource="config.properties"/>
+    <settings>
+    <!--mybatis最复杂的配置，自动映射驼峰命名，级联规则，开启缓存执行器类型等-->
+        <setting name="logImpl" value="LOG4J"/>
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <typeAliases>
+       <!-- <typeAlias type="com.jt.pro.model.Blog" alias="blog"/>-->
+        <!--别名包配置-->
+        <package name="com.jt.pro"/>
+    </typeAliases>
+    <typeHandlers >
+        <!--<typeHandler handler="com.jt.pro.MyTypeHandler" javaType="string" jdbcType="VARCHAR"
+                     />-->
+        <package name="com.jt"/>
+    </typeHandlers>
+    <!-- 配置初始化环境(连接) -->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url"  value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+
+            </dataSource>
+        </environment>
+    </environments>
+    <!--映射文件-->
+    <mappers>
+        <mapper  resource="mapper/BlogMapper.xml" />
+    </mappers>
+</configuration>
