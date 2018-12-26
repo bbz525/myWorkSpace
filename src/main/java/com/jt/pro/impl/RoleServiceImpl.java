@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+/**
+ * comment:
+ */
 @Component
 public class RoleServiceImpl implements RoleService {
     @Autowired
@@ -17,6 +20,7 @@ public class RoleServiceImpl implements RoleService {
         System.out.println("id=" + role.getId());
         System.out.println("roleName=" + role.getRoleName());
         System.out.println("rolenote=" + role.getNote());
+
     }
 
     public static void main(String[] args) {
